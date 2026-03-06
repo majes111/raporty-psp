@@ -49,19 +49,22 @@ width:100%;
 padding:10px;
 margin-top:5px;
 margin-bottom:12px;
-border:none;
 border-radius:6px;
-background:#1e293b;
-color:white;
-}
+border:1px solid #334155;
 
-input::placeholder,
-textarea::placeholder{
-color:#94a3b8;
+/* JAŚNIEJSZY KOLOR GŁÓWNYCH PÓL */
+background:#334155;
+
+color:white;
 }
 
 textarea{
 min-height:80px;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:#cbd5f5;
 }
 
 button{
@@ -95,9 +98,11 @@ border-radius:8px;
 background:#0f172a;
 }
 
-/* inne pole dla zastępów */
+/* INNY KOLOR PÓL W ZASTĘPACH */
+
 .zastep input{
-background:#334155;
+background:#475569;
+border:1px solid #64748b;
 }
 
 /* RESPONSYWNOŚĆ TELEFON */
