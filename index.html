@@ -8,46 +8,84 @@
 
 body{
 font-family: Arial;
-background:#f2f2f2;
+background:#0f172a;
 padding:20px;
+color:white;
 }
 
 .container{
-max-width:700px;
+max-width:800px;
 margin:auto;
-background:white;
-padding:20px;
-border-radius:8px;
+background:#1e293b;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
 h1{
 text-align:center;
-color:red;
+color:#ef4444;
+margin-bottom:25px;
+}
+
+h2{
+color:#ef4444;
+margin-top:25px;
+}
+
+h3{
+margin-top:0;
+color:#f87171;
+}
+
+label{
+font-size:14px;
 }
 
 input,textarea{
 width:100%;
-padding:8px;
+padding:10px;
 margin-top:5px;
-margin-bottom:10px;
-border:1px solid #ccc;
-border-radius:4px;
+margin-bottom:12px;
+border:none;
+border-radius:6px;
+background:#0f172a;
+color:white;
+}
+
+textarea{
+min-height:80px;
 }
 
 button{
-background:red;
+background:#ef4444;
 color:white;
 border:none;
-padding:10px;
-border-radius:5px;
+padding:12px;
+border-radius:6px;
 cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#dc2626;
+}
+
+.add{
 margin-top:10px;
+background:#2563eb;
+}
+
+.add:hover{
+background:#1d4ed8;
 }
 
 .zastep{
-border:1px solid #ddd;
-padding:10px;
+border:1px solid #334155;
+padding:15px;
 margin-top:15px;
+border-radius:8px;
+background:#0f172a;
 }
 
 </style>
@@ -57,7 +95,7 @@ margin-top:15px;
 
 <div class="container">
 
-<h1>Karta Zdarzenia</h1>
+<h1>🚒 Karta Zdarzenia</h1>
 
 <form id="form">
 
@@ -77,14 +115,14 @@ margin-top:15px;
 
 <div id="zastepy"></div>
 
-<button type="button" onclick="dodajZastep()">➕ Dodaj kolejny zastęp</button>
+<button type="button" class="add" onclick="dodajZastep()">➕ Dodaj zastęp</button>
 
 <br><br>
 
 <label>Sporządzający</label>
 <input id="autor">
 
-<button type="submit">Wyślij raport</button>
+<button type="submit">🚨 Wyślij raport</button>
 
 </form>
 
@@ -92,7 +130,7 @@ margin-top:15px;
 
 <script>
 
-const webhook = "https://discordapp.com/api/webhooks/1479477217150111795/piurRswAo5CTd43UoWknCZlvVlSpoNG4ZHp4DVVkOHoTY9lE3-GQqqh1gvUfrR2dhdHJ"
+const webhook = "TU_WKLEJ_WEBHOOK"
 
 let licznik = 0
 
@@ -139,22 +177,22 @@ e.preventDefault()
 let fields = []
 
 fields.push({
-name:"Kategoria",
+name:"🚨 Kategoria",
 value:document.getElementById("kategoria").value || "-"
 })
 
 fields.push({
-name:"Wielkość",
+name:"📊 Wielkość",
 value:document.getElementById("wielkosc").value || "-"
 })
 
 fields.push({
-name:"Lokalizacja",
+name:"📍 Lokalizacja",
 value:document.getElementById("lokalizacja").value || "-"
 })
 
 fields.push({
-name:"Opis",
+name:"📝 Opis",
 value:document.getElementById("opis").value || "-"
 })
 
@@ -185,13 +223,13 @@ Pomocnik R2: ${pr2}`
 })
 
 fields.push({
-name:"Sporządzający",
+name:"👨‍🚒 Sporządzający",
 value:document.getElementById("autor").value || "-"
 })
 
 const embed = {
-title:"🚨 Nowe Zdarzenie",
-color:16711680,
+title:"🚨 RAPORT ZDARZENIA",
+color:15158332,
 fields:fields,
 timestamp:new Date()
 }
