@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Karta Zdarzenia</title>
 
 <style>
@@ -11,6 +12,7 @@ font-family: Arial;
 background:#0f172a;
 padding:20px;
 color:white;
+margin:0;
 }
 
 .container{
@@ -49,8 +51,13 @@ margin-top:5px;
 margin-bottom:12px;
 border:none;
 border-radius:6px;
-background:#0f172a;
+background:#1e293b;
 color:white;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:#94a3b8;
 }
 
 textarea{
@@ -86,6 +93,33 @@ padding:15px;
 margin-top:15px;
 border-radius:8px;
 background:#0f172a;
+}
+
+/* inne pole dla zastępów */
+.zastep input{
+background:#334155;
+}
+
+/* RESPONSYWNOŚĆ TELEFON */
+
+@media (max-width:600px){
+
+body{
+padding:10px;
+}
+
+.container{
+padding:15px;
+}
+
+h1{
+font-size:22px;
+}
+
+button{
+width:100%;
+}
+
 }
 
 </style>
@@ -130,7 +164,7 @@ background:#0f172a;
 
 <script>
 
-const webhook = "TU_WKLEJ_WEBHOOK"
+const webhook = "https://discordapp.com/api/webhooks/1479477217150111795/piurRswAo5CTd43UoWknCZlvVlSpoNG4ZHp4DVVkOHoTY9lE3-GQqqh1gvUfrR2dhdHJ"
 
 let licznik = 0
 
