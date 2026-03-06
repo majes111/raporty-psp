@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Karta Zdarzenia</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:8px;
+}
+
+h1{
+text-align:center;
+color:red;
+}
+
+input,textarea{
+width:100%;
+padding:8px;
+margin-top:5px;
+margin-bottom:10px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+button{
+background:red;
+color:white;
+border:none;
+padding:10px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.zastep{
+border:1px solid #ddd;
+padding:10px;
+margin-top:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Karta Zdarzenia</h1>
+
+<form id="form">
+
+<label>Kategoria zdarzenia</label>
+<input id="kategoria">
+
+<label>Wielkość zdarzenia</label>
+<input id="wielkosc">
+
+<label>Lokalizacja</label>
+<input id="lokalizacja">
+
+<label>Opis zdarzenia</label>
+<textarea id="opis"></textarea>
+
+<h2>Zastępy</h2>
+
+<div id="zastepy"></div>
+
+<button type="button" onclick="dodajZastep()">➕ Dodaj kolejny zastęp</button>
+
+<br><br>
+
+<label>Sporządzający</label>
+<input id="autor">
+
+<button type="submit">Wyślij raport</button>
+
+</form>
+
+</div>
+
+<script>
+
+const webhook = "https://discordapp.com/api/webhooks/1479477217150111795/piurRswAo5CTd43UoWknCZlvVlSpoNG4ZHp4DVVkOHoTY9lE3-GQqqh1gvUfrR2dhdHJ"
+
+let licznik = 0
+
+function dodajZastep(){
+
+licznik++
+
+const div = document.createElement("div")
+div.className="zastep"
+
+div.innerHTML = `
+<h3>Zastęp ${licznik}</h3>
+
+<label>Pojazd</label>
+<input class="pojazd">
+
+<label>Kierowca</label>
+<input class="kierowca">
+
+<label>Dowódca</label>
+<input class="dowodca">
+
+<label>R1</label>
+<input class="r1">
+
+<label>Pomocnik R1</label>
+<input class="pr1">
+
+<label>R2</label>
+<input class="r2">
+
+<label>Pomocnik R2</label>
+<input class="pr2">
+`
+
+document.getElementById("zastepy").appendChild(div)
+
+}
+
+document.getElementById("form").addEventListener("submit",async function(e){
+
+e.preventDefault()
+
+let fields = []
+
+fields.push({
+name:"Kategoria",
+value:document.getElementById("kategoria").value || "-"
+})
+
+fields.push({
+name:"Wielkość",
+value:document.getElementById("wielkosc").value || "-"
+})
+
+fields.push({
+name:"Lokalizacja",
+value:document.getElementById("lokalizacja").value || "-"
+})
+
+fields.push({
+name:"Opis",
+value:document.getElementById("opis").value || "-"
+})
+
+const zastepy = document.querySelectorAll(".zastep")
+
+zastepy.forEach((z,i)=>{
+
+const pojazd=z.querySelector(".pojazd").value || "-"
+const kierowca=z.querySelector(".kierowca").value || "-"
+const dowodca=z.querySelector(".dowodca").value || "-"
+const r1=z.querySelector(".r1").value || "-"
+const pr1=z.querySelector(".pr1").value || "-"
+const r2=z.querySelector(".r2").value || "-"
+const pr2=z.querySelector(".pr2").value || "-"
+
+fields.push({
+name:`🚒 Zastęp ${i+1}`,
+value:
+`Pojazd: ${pojazd}
+Kierowca: ${kierowca}
+Dowódca: ${dowodca}
+R1: ${r1}
+Pomocnik R1: ${pr1}
+R2: ${r2}
+Pomocnik R2: ${pr2}`
+})
+
+})
+
+fields.push({
+name:"Sporządzający",
+value:document.getElementById("autor").value || "-"
+})
+
+const embed = {
+title:"🚨 Nowe zgłoszenie",
+color:16711680,
+fields:fields,
+timestamp:new Date()
+}
+
+await fetch(webhook,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({embeds:[embed]})
+})
+
+alert("Raport wysłany!")
+
+})
+
+</script>
+
+</body>
+</html>
